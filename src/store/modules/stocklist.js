@@ -11,7 +11,7 @@ export const stocklist = {
   },
   actions: {
     buyStock({ commit }, payload){
-      commit();
+      commit('buyStock', payload);
     },
     initStocks({ commit }){
       commit('setStocks', stocks);
