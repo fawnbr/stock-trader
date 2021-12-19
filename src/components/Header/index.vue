@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <v-toolbar app>
     <v-toolbar-title class="headline text-uppercase mr-4">
       <span>Stock</span>
@@ -13,7 +13,7 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-items>
-      <v-btn flat>Finish day</v-btn>
+      <v-btn flat>End day</v-btn>
       <v-menu offset-y>
         <v-btn flat slot="activator">Load & Save</v-btn>
         <v-list>
@@ -25,14 +25,23 @@
           </v-list-tile>
         </v-list>
       </v-menu>
+      <v-layout align-center>
+        <span class="text-uppercase gray--text text--darken-2">Balance: {{ funds }}</span>
+      </v-layout>
     </v-toolbar-items>
   </v-toolbar>
 </template>
+
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  
+  computed: {
+    ...mapGetters(['funds']),
+  }
 }
 </script>
-<style lang="">
+
+<style>
   
 </style>

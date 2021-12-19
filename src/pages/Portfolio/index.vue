@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <v-layout row wrap>
     <Stock v-for="stock in stocks" :key="stock.id" :stock="stock" mode="sell"/>
   </v-layout>
@@ -15,6 +15,7 @@ export default {
   },
 }
 </script>
-<style lang="">
+
+<style>
   
 </style>
