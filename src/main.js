@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import './plugins/vuetify';
+import './plugins/axios';
+import './filters';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import filters from './filters';
 
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
-  filters,
 	render: h => h(App),
 }).$mount('#app');

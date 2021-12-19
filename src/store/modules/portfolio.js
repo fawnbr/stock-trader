@@ -25,6 +25,10 @@ export const portfolio = {
       }
       state.funds += stockPrice * quantity;
     },
+    setPortfolio(state, payload){
+      state.funds = payload.funds;
+      state.stocks = payload.stockPortfolio ? payload.stockPortfolio : [];
+    },
   },
   actions: {
     sellStock({ commit }, payload){

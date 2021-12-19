@@ -17,10 +17,10 @@
       <v-menu offset-y>
         <v-btn flat slot="activator">Load & Save</v-btn>
         <v-list>
-          <v-list-tile>      
+          <v-list-tile @click="loadData">      
             <v-list-tile-title>Load data</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile>
+          <v-list-tile @click="saveData">
             <v-list-tile-title>Save data</v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -41,10 +41,14 @@ export default {
     ...mapGetters(['funds']),
   },
   methods: {
-    ...mapActions(['randomizeStocks']),
+    ...mapActions(['randomizeStocks', 'loadData']),
     endDay() {
       this.randomizeStocks();
-    }
+    },
+    saveData() {
+      const { funds, stockPortfolio, stocks } = this.$store.getters;
+      this.$http.put('data.json', { funds , stockPortfolio, stocks });
+    },
   }
 }
 </script>
