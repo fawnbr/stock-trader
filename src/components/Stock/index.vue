@@ -5,7 +5,7 @@
         <strong>
           {{ stock.name }}
           <small>
-            (Price: {{ stock.price  }}{{ this.mode == 'sell' ? ` | Qty: ${stock.quantity}`: '' }})
+            (Price: {{ stock.price | currency  }}{{ this.mode == 'sell' ? ` | Qty: ${stock.quantity}`: '' }})
           </small>
         </strong>
       </v-card-title>
