@@ -17,11 +17,12 @@
           label="Quantity"
           type="number"
           v-model.number="quantity"
+          :error="validateField(false)"
         />
         <v-btn 
           class="darken-3 white--text"
           :class="{blue: sell, green: !sell}"
-          :disabled="quantity <= 0 || !Number.isInteger(quantity)"
+          :disabled="validateField(true)"
           @click="sell ? sellStock() : buyStock()"
         >
           {{ sell ? 'Sell' : 'Buy'}}
@@ -32,6 +33,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -49,6 +51,15 @@ export default {
       quantity: 0,
       sell: this.mode == 'sell' ? true : false,
     }
+  },
+  computed: {
+    ...mapGetters(['funds']),
+    insufficientFunds() {
+      return this.quantity * this.stock.price > this.funds;
+    },
+    insufficientQuantity() {
+      return this.quantity > this.stock.quantity;
+    },
   },
   methods: {
     buyStock() {
@@ -72,6 +83,14 @@ export default {
     },
     clearQuantity() {
       this.quantity = 0;
+    },
+    validateField(disabled){
+      if(disabled){
+        return !this.sell && this.insufficientFunds|| this.sell && this.insufficientQuantity || this.quantity <= 0 || !Number.isInteger(this.quantity);
+      }
+      else {
+         return !this.sell && this.insufficientFunds|| this.sell && this.insufficientQuantity || this.quantity < 0 || !Number.isInteger(this.quantity);
+      }
     }
   },
 }
